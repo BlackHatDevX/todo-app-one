@@ -1,17 +1,20 @@
 import AddTodo from "./components/AddTodo";
 import AppName from "./components/AppName";
-import DataTodo from "./components/DataTodo";
-const data = ["Go to school", "Go to College"];
+import TodoItem from "./components/TodoItem";
 function App() {
+  const data = [
+    { name: "Go to school", date: "04/10/2023" },
+    { name: "Go to College", date: "04/11/2023" },
+    { name: "v important work", date: "05/05/2023" },
+  ];
+
   return (
     <>
       <center className="todo-container">
         <AppName />
         <div className="container text-center">
           <AddTodo />
-          {data.map((values) => {
-            return <DataTodo name={values} date="04/10/2023" />;
-          })}
+          <TodoItem data={data} />
         </div>
       </center>
     </>
