@@ -1,20 +1,49 @@
+import { useState } from "react";
 import AddTodo from "./components/AddTodo";
 import AppName from "./components/AppName";
 import TodoItem from "./components/TodoItem";
+import EmptyMessage from "./components/EmptyMessage";
 function App() {
-  const data = [
-    { name: "Go to school", date: "04/10/2023" },
-    { name: "Go to College", date: "04/11/2023" },
-    { name: "v important work", date: "05/05/2023" },
-  ];
+  const [data, setData] = useState([]);
+  const [val, setVal] = useState("safd");
+  const [date, setDate] = useState("");
+  const getValue = (txt) => {
+    setVal(txt);
+  };
+  const getDate = (datefinal) => {
+    setDate(datefinal);
+  };
+  const AddData = () => {
+    const newData = [...data, { name: val, date: date }];
+    setData(newData);
+    setVal("");
+    setDate("");
+  };
+  const DeleteData = (name, date) => {
+    const newData = data.filter(
+      (item) => item.name !== name || item.date !== date
+    );
+    setData(newData);
+  };
 
   return (
     <>
       <center className="todo-container">
         <AppName />
         <div className="container text-center">
-          <AddTodo />
-          <TodoItem data={data} />
+          <AddTodo
+            AddData={AddData}
+            getValue={getValue}
+            val={val}
+            date={date}
+            getDate={getDate}
+          />
+
+          {data.length == 0 ? (
+            <EmptyMessage />
+          ) : (
+            <TodoItem data={data} DeleteData={DeleteData} />
+          )}
         </div>
       </center>
     </>
