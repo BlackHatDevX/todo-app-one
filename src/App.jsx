@@ -5,7 +5,7 @@ import TodoItem from "./components/TodoItem";
 import EmptyMessage from "./components/EmptyMessage";
 function App() {
   const [data, setData] = useState([]);
-  const [val, setVal] = useState("safd");
+  const [val, setVal] = useState("");
   const [date, setDate] = useState("");
   const getValue = (txt) => {
     setVal(txt);

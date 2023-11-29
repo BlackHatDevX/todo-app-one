@@ -7,7 +7,7 @@ const TodoItem = ({ data, DeleteData }) => {
         return (
           <DataTodo
             name={values.name}
-            key={values.name}
+            key={values.name + values.date + Math.random() * Math.random()}
             date={values.date}
             DeleteData={DeleteData}
           />
