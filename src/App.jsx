@@ -1,24 +1,27 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import AddTodo from "./components/AddTodo";
 import AppName from "./components/AppName";
 import TodoItem from "./components/TodoItem";
 import EmptyMessage from "./components/EmptyMessage";
 function App() {
+  const valRef = useRef();
+  const dateRef = useRef();
+
   const [data, setData] = useState([]);
-  const [val, setVal] = useState("");
-  const [date, setDate] = useState("");
-  const getValue = (txt) => {
-    setVal(txt);
+
+  const AddData = (event) => {
+    event.preventDefault();
+    const finalVal = valRef.current.value;
+    const finalDate = dateRef.current.value;
+    valRef.current.value = "";
+    dateRef.current.value = "";
+    handleData(finalVal, finalDate);
   };
-  const getDate = (datefinal) => {
-    setDate(datefinal);
+
+  const handleData = (v, d) => {
+    setData((currVal) => [...currVal, { name: v, date: d }]);
   };
-  const AddData = () => {
-    const newData = [...data, { name: val, date: date }];
-    setData(newData);
-    setVal("");
-    setDate("");
-  };
+
   const DeleteData = (name, date) => {
     const newData = data.filter(
       (item) => item.name !== name || item.date !== date
@@ -31,13 +34,7 @@ function App() {
       <center className="todo-container">
         <AppName />
         <div className="container text-center">
-          <AddTodo
-            AddData={AddData}
-            getValue={getValue}
-            val={val}
-            date={date}
-            getDate={getDate}
-          />
+          <AddTodo AddData={AddData} valRef={valRef} dateRef={dateRef} />
 
           {data.length == 0 ? (
             <EmptyMessage />

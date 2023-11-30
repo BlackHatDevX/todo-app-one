@@ -1,4 +1,5 @@
 import css from "./DataTodo.module.css";
+import { FaTrashAlt } from "react-icons/fa";
 
 const DataTodo = ({ name, date, DeleteData }) => {
   return (
@@ -12,7 +13,7 @@ const DataTodo = ({ name, date, DeleteData }) => {
             DeleteData(name, date);
           }}
         >
-          Delete
+          <FaTrashAlt />
         </button>
       </div>
     </div>
