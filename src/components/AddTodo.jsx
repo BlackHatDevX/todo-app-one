@@ -1,11 +1,9 @@
+import { useContext } from "react";
 import styles from "./AddTodo.module.css";
 import { FaCheckCircle } from "react-icons/fa";
-const AddTodo = ({
-  AddData,
-
-  valRef,
-  dateRef,
-}) => {
+import { ItemsData } from "../store/ItemsData";
+const AddTodo = ({ valRef, dateRef }) => {
+  const { AddData } = useContext(ItemsData);
   return (
     <>
       <form

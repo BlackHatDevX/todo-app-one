@@ -3,6 +3,7 @@ import AddTodo from "./components/AddTodo";
 import AppName from "./components/AppName";
 import TodoItem from "./components/TodoItem";
 import EmptyMessage from "./components/EmptyMessage";
+import { ItemsData } from "./store/ItemsData";
 function App() {
   const valRef = useRef();
   const dateRef = useRef();
@@ -30,20 +31,18 @@ function App() {
   };
 
   return (
-    <>
-      <center className="todo-container">
-        <AppName />
-        <div className="container text-center">
-          <AddTodo AddData={AddData} valRef={valRef} dateRef={dateRef} />
+    <ItemsData.Provider value={{ data, AddData, DeleteData }}>
+      <>
+        <center className="todo-container">
+          <AppName />
+          <div className="container text-center">
+            <AddTodo valRef={valRef} dateRef={dateRef} />
 
-          {data.length == 0 ? (
-            <EmptyMessage />
-          ) : (
-            <TodoItem data={data} DeleteData={DeleteData} />
-          )}
-        </div>
-      </center>
-    </>
+            {data.length == 0 ? <EmptyMessage /> : <TodoItem />}
+          </div>
+        </center>
+      </>
+    </ItemsData.Provider>
   );
 }
 
